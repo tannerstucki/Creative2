@@ -1,115 +1,161 @@
-$(document).ready(function() {
-    //console.log("hello world");
-    $("#itemSubmit").click(function(e) {
-        e.preventDefault();
-        var value = $("#itemInput").val();
-        //console.log(value);
-        var myurl = "http://www.themealdb.com/api/json/v1/1/search.php?s=" + value;
-        
-        $.ajax({
-            url: myurl,
-            dataType : "json",
-            /*data: {method: "getQuote", format: "jsonp", lang: "en"},
-            dataType: 'JSONP',
-            jsonp: "jsonp",
-            jsonCallback: 'myJsonMethod',
-            type: 'GET',*/
-            success: function(info) {
-                console.log(info);
-                if (info.meals === null){
-                    var header = "<h2><u><b>Nothing found for \"" + value + "\"</h2></u></b>";
-                    header += "<br><h3>Please try a different search. :)</h3>";
-                    header += "<br><h6>Try something like \"Chicken\"";
-                    var results = "";
-                }
-                else {
-                var header = "";
-                var results = "";
-                header += "<h2><u><b>" + info.meals.length + " recipe(s) found for \"" + value + "\"</u></h2><br>";
-                for (var i = 0; i<info.meals.length; i++){
-                    results += "<h3><u>" + info.meals[i].strMeal + "</u></h3>";
-                    results += "<h4>Ingredients:</h4>"
-                    if (info.meals[i].strIngredient1 !== "" && info.meals[i].strIngredient1 !== null){ 
-                    results += "<ul><li>" + info.meals[i].strMeasure1 + " " + info.meals[i].strIngredient1 + "</li>";
-                    }
-                    if (info.meals[i].strIngredient2 !== "" && info.meals[i].strIngredient2 !== null){ 
-                    results += "<li>" + info.meals[i].strMeasure2 + " " + info.meals[i].strIngredient2 + "</li>";
-                    }
-                    if (info.meals[i].strIngredient3 !== "" && info.meals[i].strIngredient3 !== null){ 
-                    results += "<li>" + info.meals[i].strMeasure3 + " " + info.meals[i].strIngredient3 + "</li>";
-                    }
-                    if (info.meals[i].strIngredient4 !== "" && info.meals[i].strIngredient4 !== null){ 
-                    results += "<li>" + info.meals[i].strMeasure4 + " " + info.meals[i].strIngredient4 + "</li>";
-                    }
-                    if (info.meals[i].strIngredient5 !== "" && info.meals[i].strIngredient5 !== null){ 
-                    results += "<li>" + info.meals[i].strMeasure5 + " " + info.meals[i].strIngredient5 + "</li>";
-                    }
-                    if (info.meals[i].strIngredient6 !== "" && info.meals[i].strIngredient6 !== null){ 
-                    results += "<li>" + info.meals[i].strMeasure6 + " " + info.meals[i].strIngredient6 + "</li>";
-                    }
-                    if (info.meals[i].strIngredient7 !== "" && info.meals[i].strIngredient7 !== null){ 
-                    results += "<li>" + info.meals[i].strMeasure7 + " " + info.meals[i].strIngredient7 + "</li>";
-                    }
-                    if (info.meals[i].strIngredient8 !== "" && info.meals[i].strIngredient8 !== null){ 
-                    results += "<li>" + info.meals[i].strMeasure8 + " " + info.meals[i].strIngredient8 + "</li>";
-                    }
-                    if (info.meals[i].strIngredient9 !== "" && info.meals[i].strIngredient9 !== null){ 
-                    results += "<li>" + info.meals[i].strMeasure9 + " " + info.meals[i].strIngredient9 + "</li>";
-                    }
-                    if (info.meals[i].strIngredient10 !== "" && info.meals[i].strIngredient10 !== null){ 
-                    results += "<li>" + info.meals[i].strMeasure10 + " " + info.meals[i].strIngredient10 + "</li>";
-                    }
-                    if (info.meals[i].strIngredient11 !== "" && info.meals[i].strIngredient11 !== null){ 
-                    results += "<li>" + info.meals[i].strMeasure11 + " " + info.meals[i].strIngredient11 + "</li>";
-                    }
-                    if (info.meals[i].strIngredient12 !== "" && info.meals[i].strIngredient12 !== null){ 
-                    results += "<li>" + info.meals[i].strMeasure12 + " " + info.meals[i].strIngredient12 + "</li>";
-                    }
-                    if (info.meals[i].strIngredient13 !== "" && info.meals[i].strIngredient13 !== null){ 
-                    results += "<li>" + info.meals[i].strMeasure13 + " " + info.meals[i].strIngredient13 + "</li>";
-                    }
-                    if (info.meals[i].strIngredient14 !== "" && info.meals[i].strIngredient14 !== null){ 
-                    results += "<li>" + info.meals[i].strMeasure14 + " " + info.meals[i].strIngredient14 + "</li>";
-                    }
-                    if (info.meals[i].strIngredient15 !== "" && info.meals[i].strIngredient15 !== null){ 
-                    results += "<li>" + info.meals[i].strMeasure15 + " " + info.meals[i].strIngredient15 + "</li>";
-                    }
-                    if (info.meals[i].strIngredient16 !== "" && info.meals[i].strIngredient16 !== null){ 
-                    results += "<li>" + info.meals[i].strMeasure16 + " " + info.meals[i].strIngredient16 + "</li>";
-                    }
-                    if (info.meals[i].strIngredient17 !== "" && info.meals[i].strIngredient17 !== null){ 
-                    results += "<li>" + info.meals[i].strMeasure17 + " " + info.meals[i].strIngredient17 + "</li>";
-                    }
-                    if (info.meals[i].strIngredient18 !== "" && info.meals[i].strIngredient18 !== null){ 
-                    results += "<li>" + info.meals[i].strMeasure18 + " " + info.meals[i].strIngredient18 + "</li>";
-                    }
-                    if (info.meals[i].strIngredient19 !== "" && info.meals[i].strIngredient19 !== null){ 
-                    results += "<li>" + info.meals[i].strMeasure19 + " " + info.meals[i].strIngredient19 + "</li>";
-                    }
-                    if (info.meals[i].strIngredient20 !== "" && info.meals[i].strIngredient20 !== null){ 
-                    results += "<li>" + info.meals[i].strMeasure20 + " " + info.meals[i].strIngredient20 + "</li></ul>";
-                    }
-                    results += "</ul>"
-                    results += "<h4>Instructions:</h4>"
-                    results += "<p>&#8195" + info.meals[i].strInstructions + "</p>";
-                    if (info.meals[i].strSource !== "" && info.meals[i].strSource !== null && info.meals[i].strSource !== "none"){
-                    results += "<p>Source:<a target='_blank' href='"+ info.meals[i].strSource.split('href=')+"'> " + info.meals[i].strSource + "</a></p>";
-                    }
-                    else{
-                        results += "<p>No source link provided.</p>"
-                    }
-                    if (info.meals[i].strYoutube !== "" && info.meals[i].strYoutube !== null && info.meals[i].strYoutube !== "none"){
-                    results += "<p>Youtube:<a target='_blank' href='"+ info.meals[i].strYoutube.split('href=')+"'> " + info.meals[i].strYoutube + "</a></p>";
-                    }
-                    else{
-                        results += "<p>No Youtube link provided.</p>"
-                    }
-                    results += "<br><hr>";
-                }
-                }
-                $("#header").html(header);
-                $("#results").html(results);    
-            }
-        })
-    });
+Vue.component('star-rating', VueStarRating.default);
+//import axios from 'axios';
+
+var app = new Vue({
+  el: '#app',
+    data: {
+    number: '',
+    current: {},
+    loading: true,
+  },
+  data: {
+    number: '',
+    max: '',
+    current: {},
+    loading: true,
+    addedName: '',
+    addedComment: '',
+    comments: {},
+    rating: 0,
+    totalRating: 0,
+    numberRatings: 0,
+    averageRatings: {},
+    averager: 0,
+    i: 0,
+    el: document.body,
+    posts: [],
+    errors: [],
+    firstTime: false,
+    likes: 0,
+    dislikes: 0,
+    totalLikes: {},
+    totalDislikes: {},
+    images: {},
+    j: 0,
+    currentImage: "img/flowers.jpg",
+  },
+  created: function() {
+    this.xkcd();
+  },
+    watch: {
+    number: function(value,oldvalue) {
+      if (oldvalue === '') {
+	this.max = value;
+      } else {
+	//this.xkcd();
+      }
+    },
+  },
+  computed: {
+      getImages: function() {
+          var images = new Array;
+          images[0] = "img/flowers.jpg";
+          images[1] = "img/river.jpg";
+      }
+  },
+  methods: {
+    xkcd: function() {
+    axios.get('https://talaikis.com/api/quotes/' + this.number).then(response => {
+    this.posts = response.data;
+    this.number = 1;
+    console.log(this.number);
+    this.current = this.posts[this.number];
+    this.loading = false;
+    console.log(this.current.author);
+    return this.current;
+      }).catch(err => {
+          this.number = this.max
+      });
+    },
+      previousComic: function() {
+    if (this.number === 0){
+        this.number = 99;
+        this.current = this.posts[this.number];
+    }
+    else{
+      this.number = this.number - 1;
+      //console.log(this.number);
+      this.current = this.posts[this.number];
+      //console.log(this.current.author);
+    }
+    },
+          firstComic: function() {
+      this.number = 1;
+    },
+            lastComic: function() {
+      this.number = this.max;
+    },
+    nextComic: function() {
+      if (this.number === 99){
+        this.number = 0;
+        this.current = this.posts[this.number];
+        newImage();
+      }
+      else{
+        this.number = this.number + 1;
+        this.current = this.posts[this.number];
+      }
+    },
+    newImage: function(){
+        j++;
+        this.currentImage = images[j];
+    },
+       getRandom: function(min, max) {
+      min = Math.ceil(0);
+      max = Math.floor(99);
+      return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum and minimum are inclusive 
+    },
+    randomComic: function() {
+      this.number = this.getRandom(1, this.max);
+      this.current = this.posts[this.number];
+    },
+    addComment: function() {
+      if (!(this.number in this.comments))
+	Vue.set(app.comments, this.number, new Array);
+      this.comments[this.number].push({author:this.addedName,text:this.addedComment, when:this.timer});
+      this.addedName = '';
+      this.addedComment = '';
+    },
+    moment: function(){
+      return moment();
+    },
+    imgClick: function myFunction() {
+        if (!(this.number in this.totalLikes)){
+          Vue.set(app.totalLikes, this.number, new Array)
+          this.likes = 0; 
+        }
+        this.likes++;
+        if (this.number in this.totalLikes){
+            this.totalLikes[this.number].pop();
+        }
+        this.totalLikes[this.number].push(this.likes);
+    },
+    imgClick2: function myFunction(){
+        if (!(this.number in this.totalDislikes)){
+          Vue.set(app.totalDislikes, this.number, new Array)
+          this.dislikes = 0; 
+        }
+        this.dislikes++;
+        if (this.number in this.totalDislikes){
+            this.totalDislikes[this.number].pop();
+        }
+        this.totalDislikes[this.number].push(this.dislikes);
+    },
+    addRating: function(changer) {    
+        if (!(this.number in this.averageRatings)){
+          Vue.set(app.averageRatings, this.number, new Array)
+          this.totalRating = 0;
+          this.i = 0;  
+        }
+        this.i = this.i + 1;   
+        this.totalRating = this.totalRating + this.rating;
+        this.averager = this.totalRating / this.i;
+        if (this.number in this.averageRatings){
+          this.averageRatings[this.number].pop();
+        }
+        this.averageRatings[this.number].push({average: this.averager, total: this.totalRating, count: this.i})
+        this.averager = 0;
+        this.total = 0;     
+    }
+  }
 });
